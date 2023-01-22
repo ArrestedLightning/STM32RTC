@@ -486,8 +486,8 @@ bool RTC_init(hourFormat_t format, sourceClock_t source, bool reset)
 #if defined(STM32F1xx)
       memcpy(&RtcHandle.DateToUpdate, &BackupDate, 4);
       /* and fill the new RTC Date value */
-      RTC_SetDate(RtcHandle.DateToUpdate.Year, RtcHandle.DateToUpdate.Month,
-                  RtcHandle.DateToUpdate.Date, RtcHandle.DateToUpdate.WeekDay);
+      RTC_TimeTypeDef RTC_TimeStruct;
+      HAL_RTC_GetTime(&RtcHandle, &RTC_TimeStruct, RTC_FORMAT_BIN);
 #else
       // This initialize variables: predivAsync, predivSync and predivSync_bits
       RTC_getPrediv(NULL, NULL);
